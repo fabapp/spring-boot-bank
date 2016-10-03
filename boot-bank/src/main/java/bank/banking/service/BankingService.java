@@ -18,6 +18,6 @@ public interface BankingService {
 
     BankAccount deposit(AccountNumber abstractAccountNumber, BigDecimal amount) throws DepositFailedException;
 
-    BankAccount withdrawal(AccountNumber abstractAccountNumber, BigDecimal amount) throws DepositFailedException, MissingAccountException, WithdrawalFailedException;
+    BankAccount withdrawal(AccountNumber abstractAccountNumber, BigDecimal amount) throws MissingAccountException, InsufficientBalanceException;
 
 }

@@ -2,6 +2,8 @@ package bank.banking.service;
 
 import java.math.BigDecimal;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import bank.banking.data.BankAccountRepository;
  * @author Fabian Krüger
  *
  */
+@Transactional
 @Service
 public class BankingServiceImpl implements BankingService {
 
@@ -49,16 +52,11 @@ public class BankingServiceImpl implements BankingService {
     }
 
     @Override
-    public BankAccount withdrawal(final AccountNumber accountNumber, final BigDecimal amount) throws WithdrawalFailedException {
+    public BankAccount withdrawal(final AccountNumber accountNumber, final BigDecimal amount) throws MissingAccountException, InsufficientBalanceException {
         BankAccount account;
-        try {
-            account = findAccount(accountNumber);
-            account.book(amount.abs().negate());
-            return account;
-        } catch (MissingAccountException | InsufficientBalanceException e) {
-            throw new WithdrawalFailedException("Withdrawal failed", e);
-        }
-
+        account = findAccount(accountNumber);
+        account.book(amount.abs().negate());
+        return account;
     }
 
     @Override
