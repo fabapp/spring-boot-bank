@@ -4,6 +4,8 @@
 package bank.banking.data;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
 
@@ -13,12 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ReflectionUtils;
-
-import bank.banking.data.AccountNumber;
-import bank.banking.data.AccountNumberProvider;
-import bank.banking.data.AccountNumberRepository;
-
-import static org.mockito.Mockito.*;
 
 /**
  * @author Fabian Krüger

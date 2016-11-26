@@ -21,10 +21,19 @@ public class AccountSettings {
     @JsonIgnore
     private BigDecimal initialBalance;
 
-    private final AccountType accountType;
+    private AccountType accountType;
 
-    @JsonProperty
+	@JsonProperty
     public void setInitialBalance(final double initialBalance) {
         this.initialBalance = new BigDecimal(initialBalance);
     }
+
+	public AccountType getAccountType() {
+		return this.accountType;
+	}
+
+	public BigDecimal getInitialBalance() {
+		return this.initialBalance;
+	}
+
 }

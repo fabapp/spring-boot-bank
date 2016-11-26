@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import bank.banking.data.AccountNumber;
 import bank.banking.data.AccountSettings;
+import bank.banking.data.AccountType;
 import bank.banking.data.BankAccount;
 
 /**
@@ -16,7 +17,8 @@ public class BankAccountFactoryImpl implements BankAccountFactory {
     @Override
     public BankAccount createAccount(final AccountSettings settings, final AccountNumber abstractAccountNumber) {
         BankAccount bankAccount;
-        switch (settings.getAccountType()) {
+        AccountType type = settings.getAccountType();
+        switch (type) {
         default:
             bankAccount = new BankAccount(abstractAccountNumber, settings.getInitialBalance());
             break;

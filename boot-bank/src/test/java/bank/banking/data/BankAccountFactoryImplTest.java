@@ -8,10 +8,6 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Test;
 
-import bank.banking.data.AccountNumber;
-import bank.banking.data.AccountSettings;
-import bank.banking.data.AccountType;
-import bank.banking.data.BankAccount;
 import bank.banking.service.BankAccountFactory;
 import bank.banking.service.BankAccountFactoryImpl;
 

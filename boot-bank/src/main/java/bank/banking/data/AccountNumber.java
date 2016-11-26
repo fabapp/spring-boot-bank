@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * @author Fabian Krüger
  *
  */
-// smell: primary key used for comparison in equals and hashCode.
+// smell: db generated primary key used for comparison in equals and hashCode.
 // Here it should be no problem, because the AccountNumber is passed to JPA
 // before it is used as key in a BankAccout or elsewhere.
 @EqualsAndHashCode(of = "accountNumber")

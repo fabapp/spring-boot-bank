@@ -7,18 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import bank.AbstractPersistenceIntegrationTest;
-import bank.AbstractServiceIntegrationTest;
-import bank.banking.data.AccountNumber;
-import bank.banking.data.AccountNumberProvider;
-import bank.banking.data.AccountNumberRepository;
-import bank.banking.data.BankAccount;
-import bank.banking.data.BankAccountRepository;
 
 /**
  * @author Fabian Krüger

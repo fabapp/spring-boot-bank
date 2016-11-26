@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 
 import bank.AbstractServiceIntegrationTest;
 import bank.banking.data.AccountSettings;
 import bank.banking.data.AccountType;
 import bank.banking.data.BankAccount;
-import bank.banking.service.BankingService;
 
 /**
  * @author Fabian Krüger
@@ -25,9 +25,12 @@ public class BankServiceIntegrationTest extends AbstractServiceIntegrationTest {
     private BankingService bankServiceImpl;
 
     @Test
+    @DirtiesContext
     public void createAccount() throws Exception {
-        AccountSettings accountSettings = new AccountSettings(new BigDecimal(100), AccountType.BANK_ACCOUNT);
+        BigDecimal initialBalance = new BigDecimal(100);
+		AccountSettings accountSettings = new AccountSettings(initialBalance, AccountType.BANK_ACCOUNT);
         BankAccount account = bankServiceImpl.createAccount(accountSettings);
-        Assert.assertEquals("0000600100", account.getAccountNumber().getValue());
+        Assert.assertNotNull(account.getAccountNumber().getValue());
+        Assert.assertEquals(initialBalance, account.getBalance());
     }
 }

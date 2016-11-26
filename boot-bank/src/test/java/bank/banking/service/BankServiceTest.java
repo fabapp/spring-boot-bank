@@ -3,7 +3,7 @@
  */
 package bank.banking.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,11 +19,6 @@ import bank.banking.data.AccountSettings;
 import bank.banking.data.AccountType;
 import bank.banking.data.BankAccount;
 import bank.banking.data.BankAccountRepository;
-import bank.banking.service.BankAccountFactory;
-import bank.banking.service.BankAccountFactoryImpl;
-import bank.banking.service.BankingServiceImpl;
-import bank.banking.service.DepositFailedException;
-import bank.banking.service.WithdrawalFailedException;
 
 /**
  * @author Fabian Krüger
