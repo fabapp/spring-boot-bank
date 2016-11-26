@@ -1,4 +1,8 @@
 language: java
 jdk:
+<<<<<<< HEAD
   - oraclejdk8
     
+=======
+  - oraclejdk8
+>>>>>>> branch 'master' of https://github.com/fabapp/spring-boot-bank.git
