@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d '{"initialBalance":100,"accountType":"BANK_ACCOUNT"}'  http://localhost:8085/rest/bank/accounts

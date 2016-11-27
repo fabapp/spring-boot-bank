@@ -40,57 +40,60 @@ import bank.banking.service.MissingAccountException;
 @RunWith(SpringRunner.class)
 @WebMvcTest(BankRestController.class)
 public class BankRestControllerIntegrationTest {
-	@Autowired
-	private MockMvc mockMvc;
-	@MockBean
-	private BankingService bankingService;
-	private JacksonTester<BankAccount> json;
 
-	@Before
-	public void setup() {
-		JacksonTester.initFields(this, new ObjectMapper());
-	}
+  @Autowired
+  private MockMvc mockMvc;
 
-	@Test
-	public void findAccount() throws Exception {
-		AccountNumber abstractAccountNumber = new AccountNumber("123");
-		BigDecimal balance = new BigDecimal(100);
-		BankAccount bankAccount = new BankAccount(abstractAccountNumber, balance);
-		when(this.bankingService.findAccount(any(AccountNumber.class))).thenReturn(bankAccount);
+  @MockBean
+  private BankingService bankingService;
 
-		this.mockMvc.perform(get("/rest/bank/accounts/1").accept(MediaType.ALL)).andExpect(status().isOk()).andExpect(content().string(json.write(bankAccount).getJson()));
+  private JacksonTester<BankAccount> json;
 
-		verify(this.bankingService).findAccount(any(AccountNumber.class));
-	}
+  @Before
+  public void setup() {
+    JacksonTester.initFields(this, new ObjectMapper());
+  }
 
-	@Test
-	public void findAccountWithUnknownAccountNumberShouldFail() throws Exception {
-		AccountNumber abstractAccountNumber = new AccountNumber("1");
-		when(this.bankingService.findAccount(any(AccountNumber.class))).thenThrow(new MissingAccountException(abstractAccountNumber));
+  @Test
+  public void findAccount() throws Exception {
+    AccountNumber abstractAccountNumber = new AccountNumber(123);
+    BigDecimal balance = new BigDecimal(100);
+    BankAccount bankAccount = new BankAccount(abstractAccountNumber, balance);
+    when(this.bankingService.findAccount(any(AccountNumber.class))).thenReturn(bankAccount);
 
-		String error = this.mockMvc.perform(get("/rest/bank/accounts/1")
-				.accept(MediaType.ALL)).andExpect(
-						status().isNotFound()).andReturn().getResponse().getErrorMessage();
-		assertEquals("No such BankAccount", error);
-		verify(this.bankingService).findAccount(any(AccountNumber.class));
-	}
+    this.mockMvc.perform(get("/rest/bank/accounts/1")
+                .accept(MediaType.ALL))
+                .andExpect(status().isOk())
+                .andExpect(content().string(json.write(bankAccount).getJson()));
 
-	@Test
-	public void createAccountTest() throws Exception {
-		AccountNumber abstractAccountNumber = new AccountNumber("123");
-		BigDecimal balance = new BigDecimal(100);
-		BankAccount bankAccount = new BankAccount(abstractAccountNumber, balance);
-		bankAccount.setId(1);
+    verify(this.bankingService).findAccount(any(AccountNumber.class));
+  }
 
-		when(this.bankingService.createAccount(any(AccountSettings.class))).thenReturn(bankAccount);
+  @Test
+  public void findAccountWithUnknownAccountNumberShouldFail() throws Exception {
+    AccountNumber abstractAccountNumber = new AccountNumber(1);
+    when(this.bankingService.findAccount(any(AccountNumber.class))).thenThrow(new MissingAccountException(abstractAccountNumber));
 
-		BankAccount createBankAccount = new BankAccount(abstractAccountNumber, balance);
+    String error = this.mockMvc.perform(get("/rest/bank/accounts/1").accept(MediaType.ALL)).andExpect(status().isNotFound()).andReturn().getResponse().getErrorMessage();
+    assertEquals("No such BankAccount", error);
+    verify(this.bankingService).findAccount(any(AccountNumber.class));
+  }
 
-		this.mockMvc.perform(post("/rest/bank/accounts").content(json.write(createBankAccount).getJson()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL))
-				.andExpect(status().isOk()).andExpect(content().string(json.write(bankAccount).getJson()));
+  @Test
+  public void createAccountTest() throws Exception {
+    AccountNumber abstractAccountNumber = new AccountNumber(123);
+    BigDecimal balance = new BigDecimal(100);
+    BankAccount bankAccount = new BankAccount(abstractAccountNumber, balance);
+    bankAccount.setId(1);
 
-		verify(this.bankingService).createAccount(any(AccountSettings.class));
-	}
-	
+    when(this.bankingService.createAccount(any(AccountSettings.class))).thenReturn(bankAccount);
+
+    BankAccount createBankAccount = new BankAccount(abstractAccountNumber, balance);
+
+    this.mockMvc.perform(post("/rest/bank/accounts").content(json.write(createBankAccount).getJson()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL))
+        .andExpect(status().isOk()).andExpect(content().string(json.write(bankAccount).getJson()));
+
+    verify(this.bankingService).createAccount(any(AccountSettings.class));
+  }
 
 }

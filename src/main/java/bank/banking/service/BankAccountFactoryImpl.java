@@ -17,8 +17,7 @@ public class BankAccountFactoryImpl implements BankAccountFactory {
     @Override
     public BankAccount createAccount(final AccountSettings settings, final AccountNumber abstractAccountNumber) {
         BankAccount bankAccount;
-        AccountType type = settings.getAccountType();
-        switch (type) {
+        switch (settings.getAccountType()) {
         default:
             bankAccount = new BankAccount(abstractAccountNumber, settings.getInitialBalance());
             break;

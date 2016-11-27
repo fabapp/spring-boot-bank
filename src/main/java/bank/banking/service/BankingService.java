@@ -11,15 +11,13 @@ import bank.banking.data.BankAccount;
  *
  */
 public interface BankingService {
-	/**
-	 * Blah...
-	 */
-    BankAccount createAccount(AccountSettings settings);
 
-    BankAccount findAccount(AccountNumber abstractAccountNumber) throws MissingAccountException;
+  BankAccount createAccount(AccountSettings settings);
 
-    BankAccount deposit(AccountNumber abstractAccountNumber, BigDecimal amount) throws DepositFailedException;
+  BankAccount findAccount(AccountNumber abstractAccountNumber) throws MissingAccountException;
 
-    BankAccount withdrawal(AccountNumber abstractAccountNumber, BigDecimal amount) throws DepositFailedException, MissingAccountException, WithdrawalFailedException;
+  BankAccount deposit(AccountNumber abstractAccountNumber, BigDecimal amount) throws DepositFailedException;
+
+  BankAccount withdrawal(AccountNumber abstractAccountNumber, BigDecimal amount) throws InsufficientFundsException, MissingAccountException;
 
 }

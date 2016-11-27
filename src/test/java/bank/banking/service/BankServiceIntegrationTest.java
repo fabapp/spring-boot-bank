@@ -21,16 +21,14 @@ import bank.banking.data.BankAccount;
  */
 public class BankServiceIntegrationTest extends AbstractServiceIntegrationTest {
 
-    @Autowired
-    private BankingService bankServiceImpl;
+  @Autowired
+  private BankingService bankServiceImpl;
 
-    @Test
-    @DirtiesContext
-    public void createAccount() throws Exception {
-        BigDecimal initialBalance = new BigDecimal(100);
-		AccountSettings accountSettings = new AccountSettings(initialBalance, AccountType.BANK_ACCOUNT);
-        BankAccount account = bankServiceImpl.createAccount(accountSettings);
-        Assert.assertNotNull(account.getAccountNumber().getValue());
-        Assert.assertEquals(initialBalance, account.getBalance());
-    }
+  @Test
+  public void createAccount() throws Exception {
+    BigDecimal initialBalance = new BigDecimal(100);
+    AccountSettings accountSettings = new AccountSettings(initialBalance, AccountType.BANK_ACCOUNT);
+    BankAccount account = bankServiceImpl.createAccount(accountSettings);
+    Assert.assertNotNull(account.getAccountNumber().getValue());
+  }
 }

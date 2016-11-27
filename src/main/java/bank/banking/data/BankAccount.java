@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import bank.banking.service.InsufficientBalanceException;
+import bank.banking.service.InsufficientFundsException;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -62,11 +62,12 @@ public class BankAccount implements Serializable {
         this.id = id;
     }
 
-    public void book(final BigDecimal amount) throws InsufficientBalanceException {
+    public void book(final BigDecimal amount) throws InsufficientFundsException {
         if (balance.add(amount).doubleValue() >= 0) {
             this.balance = this.balance.add(amount);
         } else {
-            throw new InsufficientBalanceException(getAccountNumber(), amount);
+            throw new InsufficientFundsException(getAccountNumber(), amount);
         }
     }
+    
 }

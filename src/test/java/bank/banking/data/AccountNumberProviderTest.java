@@ -22,25 +22,26 @@ import org.springframework.util.ReflectionUtils;
  */
 @RunWith(SpringRunner.class)
 public class AccountNumberProviderTest {
-	
-	private AccountNumberProvider accountNumberProvider;
-	@Mock
-	private AccountNumberRepository accountNumberRepository;
-	
-	@Before
-	public void setUp() throws IllegalArgumentException, IllegalAccessException {
-		accountNumberProvider = new AccountNumberProvider();
-		Field field = ReflectionUtils.findField(AccountNumberProvider.class, "accountNumberRepository");
-		field.setAccessible(true);
-		field.set(accountNumberProvider, accountNumberRepository);
-//		accountNumberProvider.
-	}
-	
-	@Test
-	public void testCreateAccountNumber() throws Exception {
-		AccountNumber accountNumber = new AccountNumber("100");
-		when(accountNumberRepository.save(any(AccountNumber.class))).thenReturn(accountNumber);
-		AccountNumber abstractAccountNumber = accountNumberProvider.createAccountNumber();
-		assertEquals("0000000100", abstractAccountNumber.getValue());
-	}
+
+  private AccountNumberProvider accountNumberProvider;
+
+  @Mock
+  private AccountNumberRepository accountNumberRepository;
+
+  @Before
+  public void setUp() throws IllegalArgumentException, IllegalAccessException {
+    accountNumberProvider = new AccountNumberProvider();
+    Field field = ReflectionUtils.findField(AccountNumberProvider.class, "accountNumberRepository");
+    field.setAccessible(true);
+    field.set(accountNumberProvider, accountNumberRepository);
+    // accountNumberProvider.
+  }
+
+  @Test
+  public void testCreateAccountNumber() throws Exception {
+    AccountNumber accountNumber = new AccountNumber(100);
+    when(accountNumberRepository.save(any(AccountNumber.class))).thenReturn(accountNumber);
+    AccountNumber abstractAccountNumber = accountNumberProvider.createAccountNumber();
+    assertEquals("0000000100", abstractAccountNumber.getValue());
+  }
 }

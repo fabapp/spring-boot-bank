@@ -25,8 +25,8 @@ public class AccountNumberProviderIntegrationTest extends AbstractServiceIntegra
 		AccountNumber abstractAccountNumber1 = provider.createAccountNumber();
 		AccountNumber abstractAccountNumber2 = provider.createAccountNumber();
 		AccountNumber abstractAccountNumber3 = provider.createAccountNumber();
-		Assert.assertEquals("0000600100", abstractAccountNumber1.getValue());
-		Assert.assertEquals("0000600101", abstractAccountNumber2.getValue());
-		Assert.assertEquals("0000600102", abstractAccountNumber3.getValue());
+		Assert.assertEquals("0000600101", abstractAccountNumber1.getValue());
+		Assert.assertEquals("0000600102", abstractAccountNumber2.getValue());
+		Assert.assertEquals("0000600103", abstractAccountNumber3.getValue());
 	}
 }

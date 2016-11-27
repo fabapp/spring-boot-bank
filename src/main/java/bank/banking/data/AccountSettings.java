@@ -18,22 +18,22 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AccountSettings {
 
-    @JsonIgnore
-    private BigDecimal initialBalance;
+  @JsonIgnore
+  private BigDecimal initialBalance;
 
-    private AccountType accountType;
+  private final AccountType accountType;
 
-	@JsonProperty
-    public void setInitialBalance(final double initialBalance) {
-        this.initialBalance = new BigDecimal(initialBalance);
-    }
+  @JsonProperty
+  public void setInitialBalance(final double initialBalance) {
+    this.initialBalance = new BigDecimal(initialBalance);
+  }
 
-	public AccountType getAccountType() {
-		return this.accountType;
-	}
+  public AccountType getAccountType() {
+    return this.accountType;
+  }
 
-	public BigDecimal getInitialBalance() {
-		return this.initialBalance;
-	}
+  public BigDecimal getInitialBalance() {
+    return this.initialBalance;
+  }
 
 }
