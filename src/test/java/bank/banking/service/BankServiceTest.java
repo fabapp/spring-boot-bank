@@ -101,7 +101,7 @@ public class BankServiceTest {
     assertEquals(0, bankAccount2.getBalance().intValue());
   }
 
-  @Test(expected = WithdrawalFailedException.class)
+  @Test(expected = InsufficientFundsException.class)
   public void withdrawalWithInSufficientBalanceShouldFail() throws Exception {
     AccountNumber abstractAccountNumber = new AccountNumber(123);
     BigDecimal balance = new BigDecimal(100.001);
@@ -111,7 +111,7 @@ public class BankServiceTest {
     sut.withdrawal(abstractAccountNumber, amount);
   }
 
-  @Test(expected = WithdrawalFailedException.class)
+  @Test(expected = MissingAccountException.class)
   public void withdrawalWithNonExistentAccountShouldFail() throws Exception {
     AccountNumber abstractAccountNumber = new AccountNumber(123);
     when(accountRepository.findAccountByAccountNumber(abstractAccountNumber)).thenReturn(null);

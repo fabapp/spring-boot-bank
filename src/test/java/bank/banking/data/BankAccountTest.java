@@ -26,6 +26,11 @@ public class BankAccountTest {
 		account = new BankAccount(new AccountNumber(100));
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+  public void nullAccountNumberShouldThrowException() throws Exception {
+    new BankAccount(null);
+  }
+	
 	@Test
   public void accountNumberWithSameAccountNumberShouldBeEqual() throws Exception {
     AccountNumber accountNumber = new AccountNumber(1);

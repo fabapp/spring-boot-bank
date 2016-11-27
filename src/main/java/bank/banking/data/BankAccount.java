@@ -37,6 +37,9 @@ public class BankAccount implements Serializable {
 
     public BankAccount(final AccountNumber accountNumber) {
         super();
+        if(accountNumber == null) {
+          throw new IllegalArgumentException("Valid account number must be given.");
+        }
         this.accountNumber = accountNumber;
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bank.banking.data.AccountNumber;
 import bank.banking.data.AccountSettings;
 import bank.banking.data.BankAccount;
+import bank.banking.data.InvalidAccountNumberException;
 import bank.banking.service.BankingService;
 import bank.banking.service.DepositFailedException;
 import bank.banking.service.InsufficientFundsException;
@@ -35,7 +36,7 @@ public class BankRestController {
   }
   
   @RequestMapping(value = "/accounts/{accountNumber}", method = RequestMethod.GET)
-  public BankAccount findAccount(@PathVariable("accountNumber") final String accountNumberStr) throws MissingAccountException {
+  public BankAccount findAccount(@PathVariable("accountNumber") final String accountNumberStr) throws MissingAccountException, InvalidAccountNumberException {
     AccountNumber abstractAccountNumber = new AccountNumber(accountNumberStr);
     BankAccount bankAccount = bankingService.findAccount(abstractAccountNumber);
     return bankAccount;
@@ -43,7 +44,7 @@ public class BankRestController {
 
   @RequestMapping(value = "/accounts/deposit/{accountNumber}", method = RequestMethod.POST)
   public BankAccount deposit(@PathVariable("accountNumber") final String accountNumberStr, final @RequestBody Map<String, String> json)
-      throws MissingAccountException, DepositFailedException {
+      throws MissingAccountException, DepositFailedException, InvalidAccountNumberException, InsufficientFundsException {
     AccountNumber abstractAccountNumber = new AccountNumber(accountNumberStr);
     BankAccount bankAccount = bankingService.deposit(abstractAccountNumber, new BigDecimal(json.get("amount")));
     return bankAccount;
@@ -51,7 +52,7 @@ public class BankRestController {
 
   @RequestMapping(value = "/accounts/withdrawal/{accountNumber}", method = RequestMethod.POST)
   public BankAccount withdrawal(@PathVariable("accountNumber") final String accountNumberStr, final @RequestBody Map<String, String> json)
-      throws MissingAccountException, InsufficientFundsException {
+      throws MissingAccountException, InsufficientFundsException, InvalidAccountNumberException {
     AccountNumber abstractAccountNumber = new AccountNumber(accountNumberStr);
     BankAccount bankAccount;
     bankAccount = bankingService.withdrawal(abstractAccountNumber, new BigDecimal(json.get("amount")));
