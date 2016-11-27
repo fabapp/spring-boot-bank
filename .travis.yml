@@ -1,3 +1,7 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
+deploy:
+  provider: heroku
+  api_key:
+    secure: cKJl39ffy7S1onRWdVemY/f/5tPSUG58+WwHQ/3khPNLqy8pErN96Eyspvp3ZH8lCmq/KdRg+Mmu+YHLKZ811KPiszyvH1OZ1Mc4xzYu+HAEgoEa/lNPOixSpWN2jIZkCZ5Dr7KS9Oh4htXI1/tzGKsxgPPiuGTfEWw02joH7n/Ss6ZglUX1WzGVB2xSIwivBhqlhS4eufaVmUDFk1jtsi7g9P0YIEYdyCfeYLcq7CFLpv6929ArKmtIo92+iLrOG+Wh9q3sZhvkdATs1F2b6Y8KasQXVtccycG+gAKyfbDXEpiMF+8Iq59jkeTH6IBEZt6rhJBAa7TxfZCGZ0T+tDT15GwDXoNdMFMpYPPyceplNMA1G1nmUVDrZZ8LYkb37x43UBBHyWKB8s4i9W8rt5KPdjvRJct8Vu31PDHAjtC1prn6F+BSa3NlIu20YwiTmW/A0Gc/jKymcvQiNAhHadyJ9bk+e2MVOT/AS/f1dReC/+2HHEkqO4lMynLSPu2UxxLlxMmMWtQs5qnnG7NPERwh5C0iAV4Vyk2Ct+N42yuuuwQnkASTjOpqZm/PdZizkbufIujkX4ZIPin9lWHjevmNs79bgET52khCogDoa/qA763dtLfAWWbvdvkbbnxOTAG8vvTIezokYOaLh/KjFPSFw+LDgHvNykArllxNX7I=
