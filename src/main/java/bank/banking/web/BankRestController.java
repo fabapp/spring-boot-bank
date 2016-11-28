@@ -15,10 +15,8 @@ import bank.banking.data.AccountSettings;
 import bank.banking.data.BankAccount;
 import bank.banking.data.InvalidAccountNumberException;
 import bank.banking.service.BankingService;
-import bank.banking.service.DepositFailedException;
 import bank.banking.service.InsufficientFundsException;
 import bank.banking.service.MissingAccountException;
-import bank.banking.service.WithdrawalFailedException;
 
 /**
  * @author Fabian Krüger
@@ -44,7 +42,7 @@ public class BankRestController {
 
   @RequestMapping(value = "/accounts/deposit/{accountNumber}", method = RequestMethod.POST)
   public BankAccount deposit(@PathVariable("accountNumber") final String accountNumberStr, final @RequestBody Map<String, String> json)
-      throws MissingAccountException, DepositFailedException, InvalidAccountNumberException, InsufficientFundsException {
+      throws MissingAccountException, InvalidAccountNumberException, InsufficientFundsException {
     AccountNumber abstractAccountNumber = new AccountNumber(accountNumberStr);
     BankAccount bankAccount = bankingService.deposit(abstractAccountNumber, new BigDecimal(json.get("amount")));
     return bankAccount;

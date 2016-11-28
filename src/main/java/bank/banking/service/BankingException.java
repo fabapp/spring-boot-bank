@@ -12,8 +12,4 @@ public class BankingException extends Exception {
         super(message);
     }
 
-    public BankingException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
 }
