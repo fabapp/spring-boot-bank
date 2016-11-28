@@ -14,7 +14,7 @@ import bank.banking.data.AccountNumber;
  * @author Fabian Krüger
  *
  */
-@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Insufficient Funds.")
+@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Insufficient Funds.")
 public class InsufficientFundsException extends Exception {
 
     private static final long serialVersionUID = -1742784769383421410L;

@@ -81,7 +81,7 @@ public class BankServiceTest {
     verify(accountRepository).save(bankAccount);
   }
 
-  @Test(expected = DepositFailedException.class)
+  @Test(expected = MissingAccountException.class)
   public void depositToUnknownAccountShouldFail() throws Exception {
     AccountNumber abstractAccountNumber = new AccountNumber(123);
     when(accountRepository.findAccountByAccountNumber(abstractAccountNumber)).thenReturn(null);

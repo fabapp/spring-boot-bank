@@ -16,7 +16,7 @@ public interface BankingService {
 
   BankAccount findAccount(AccountNumber abstractAccountNumber) throws MissingAccountException;
 
-  BankAccount deposit(AccountNumber abstractAccountNumber, BigDecimal amount) throws DepositFailedException;
+  BankAccount deposit(AccountNumber abstractAccountNumber, BigDecimal amount) throws MissingAccountException, InsufficientFundsException;
 
   BankAccount withdrawal(AccountNumber abstractAccountNumber, BigDecimal amount) throws InsufficientFundsException, MissingAccountException;
 

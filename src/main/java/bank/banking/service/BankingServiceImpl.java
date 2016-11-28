@@ -41,16 +41,13 @@ public class BankingServiceImpl implements BankingService {
 
   @Override
   @Transactional
-  public BankAccount deposit(final AccountNumber accountNumber, final BigDecimal amount) throws DepositFailedException {
+  public BankAccount deposit(final AccountNumber accountNumber, final BigDecimal amount)
+      throws MissingAccountException, /* FIXME: design flaw that we have this exception here: */ InsufficientFundsException {
     BankAccount bankAccount;
-    try {
-      bankAccount = findAccount(accountNumber);
-      bankAccount.book(amount);
-      bankAccountRepository.save(bankAccount);
-      return bankAccount;
-    } catch (MissingAccountException | InsufficientFundsException e) {
-      throw new DepositFailedException("Depsosit failed", e);
-    }
+    bankAccount = findAccount(accountNumber);
+    bankAccount.book(amount);
+    bankAccountRepository.save(bankAccount);
+    return bankAccount;
   }
 
   @Override
