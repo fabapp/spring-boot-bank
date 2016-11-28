@@ -3,6 +3,8 @@
  */
 package bank.banking.data;
 
+import static org.junit.Assert.*;
+
 import java.math.BigDecimal;
 
 import org.junit.Assert;
@@ -26,4 +28,5 @@ public class BankAccountFactoryImplTest {
 		Assert.assertEquals(balance, account.getBalance());
 		Assert.assertEquals("0000000001", account.getAccountNumber().getValue());
 	}
+
 }
