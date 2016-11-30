@@ -7,14 +7,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import bank.AbstractPersistenceIntegrationTest;
+import categories.IntegrationTest;
 
 /**
  * @author Fabian Krüger
  *
  */
+@Category(IntegrationTest.class)
 public class BankAccountRepositoryIntegrationTest extends AbstractPersistenceIntegrationTest {
 	@Autowired
 	private BankAccountRepository accountRepository;

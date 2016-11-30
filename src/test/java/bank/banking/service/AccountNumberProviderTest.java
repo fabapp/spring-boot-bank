@@ -3,25 +3,43 @@
  */
 package bank.banking.service;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.mockito.Mockito.mock;
 
-import bank.AbstractServiceIntegrationTest;
+import org.apache.el.util.ReflectionUtil;
+
+import static org.mockito.Mockito.*;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import bank.banking.data.AccountNumber;
 import bank.banking.data.AccountNumberProvider;
+import bank.banking.data.AccountNumberRepository;
 
 /**
  * @author Fabian Krüger
  *
  */
-public class AccountNumberProviderTest extends AbstractServiceIntegrationTest {
+public class AccountNumberProviderTest {
 	
-	@Autowired
 	private AccountNumberProvider provider;
+	private AccountNumberRepository repository;
+	
+	@Before
+	public void setuo(){
+	  repository = mock(AccountNumberRepository.class);
+	  provider = new AccountNumberProvider();
+	  provider.setAccountNumberRepository(repository);
+	}
 	
 	@Test
 	public void createAccountNumber() throws Exception {
-		AccountNumber abstractAccountNumber = provider.createAccountNumber();
-		System.out.println(abstractAccountNumber);
+	  AccountNumber managedAccountNumber = new AccountNumber(1);
+	  when(repository.save(any(AccountNumber.class))).thenReturn(managedAccountNumber);
+		AccountNumber returnedAccountNumber = provider.createAccountNumber();
+		Assert.assertSame(managedAccountNumber, returnedAccountNumber);
+		verify(repository).save(any(AccountNumber.class));
+		System.out.println(returnedAccountNumber);
 	}
 }

@@ -1,13 +1,13 @@
 package bank.banking.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Fabian Krüger
  *
  */
-@Repository
+@Service
 public class AccountNumberProvider {
 
     @Autowired
@@ -20,6 +20,13 @@ public class AccountNumberProvider {
         AccountNumber accountNumber = new AccountNumber();
         accountNumber = accountNumberRepository.save(accountNumber);
         return accountNumber;
+    }
+
+    /**
+     * @param repository
+     */
+    public void setAccountNumberRepository(AccountNumberRepository repository) {
+      this.accountNumberRepository = repository;
     }
 
 }
